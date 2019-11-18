@@ -14,6 +14,7 @@ app.use(bodyParser.urlencoded({ extended:true }));
 
 /* Login form */
 router.get('/login',(req, res)=>{
+	
 	res.render('authenticate/login',{title:'Login Page'});
 })
 
@@ -26,7 +27,7 @@ router.post('/login',(req, res)=>{
 	{
 		req.session.user_info = JSON.stringify(info_user);
     console.log('authenticate');
-		res.redirect('/');
+		res.redirect('/eyescan/');
 	}else{
 		res.redirect('/users/login',{title:'Login Page',msg_error:'LOGIN FAIL!'});
 	}
@@ -36,15 +37,11 @@ router.post('/login',(req, res)=>{
 
 router.get('/logout',(res, req, next)=>{
 
-	if(req.session.user_info)
-	{
-		req.session.destroy(function(err){
-      console.log(err);
-    });
-		res.redirect('/users/login');
-	}else{
-		res.redirect('/users/login');
-	}
+	req.session.destroy(function(){
+		console.log('User logged out!');
+	});
+
+	res.redirect('/users/login');
 });
 
 

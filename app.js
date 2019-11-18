@@ -2,6 +2,7 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var session = require('express-session');
+var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var bodyParser = require('body-parser');
@@ -33,36 +34,38 @@ app.use(bodyParser.urlencoded({extended:true}));
 
 
 
-// ---------------------- SESSION AND MIDDLEWARE --------------------------------
+// ---------------------- COOKIE,SESSION AND MIDDLEWARE --------------------------------
+app.use(cookieParser());
 // initialize express-session to allow us track the Logged-in user across session
 app.use(session({
 
 	secret:'randomstring',
-	resave: false,
-	saveUninitialized : false,   // true: can put cookie in res.cookies
-	cookie: {
-		secure: false, 	// ensures the browser only sends the cookie over HTTPS
-		//httpOnly: true, // Ensures the cookie is sent only over HTTP(S), not client JavaScript, helping to protect against cross-site scripting attacks.
-		maxAge: 600000
-	}
+	resave: true,
+	saveUninitialized : true,   // true: can put cookie in res.cookies
+	// cookie: {
+	// 	secure: false, 	// ensures the browser only sends the cookie over HTTPS
+	// 	//httpOnly: true, // Ensures the cookie is sent only over HTTP(S), not client JavaScript, helping to protect against cross-site scripting attacks.
+	// 	maxAge: 600000
+	// }
 }));
 
 // middleware to check if user's cookie is still saved in browser and user is not set, automatically log the user out
-app.use((req,res, next) => {
-	if (req.session.user_info)
+function checkSignIn(req,res,next)
+{
+	if(req.session.user_info)
 	{
-		console.log(JSON.stringify({ session :req.session.user_info } ));
+		next();
 	}else{
-		console.log('NO session please login');
+	 res.redirect('/users/login');
 	}
-	next();
-});
+	
+}
 
 //middleware check login
 
 // --------------- DEFINE ROUTES ----------
 app.use('/',indexRouter);
-app.use('/users', usersRouter);
+app.use('/users',usersRouter);
 app.use('/eyescan',eyescanRouter);
 
 // catch 404 and forward to error handler

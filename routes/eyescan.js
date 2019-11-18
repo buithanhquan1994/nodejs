@@ -73,10 +73,8 @@ router.get('/',(req, res) => {
     };
 
 
-/* each val,index in list.listImg
- div.grid-item
- img.img-thumbnail.img-item-grid(src='#{val.url}')
- */
+
+
   var objectKey = Object.keys(objectImage.listImg);
   res.render('eyescan/index',{
               listIMG: objectImage.listImg,
@@ -96,8 +94,19 @@ router.get('/detail/:image_id',(req, res) => {
 });
 
 router.post('/search',(req,res) => {
+  var valInput = req.body.keywordInput.replace(' ','');
+  var keyword = valInput.split(',');
+  keyword = Object.assign({}, keyword);
   
-  
-  res.send(req.body.keywordInput);
+  res.redirect('/eyescan/search/'+JSON.stringify(keyword));
 });
+
+router.get('/search/:keyword',(req,res) => { 
+  var keyword = JSON.parse(req.params.keyword);
+  res.render('eyescan/search',{
+            keywordObj : keyword
+
+  }); 
+});
+
 module.exports = router;
