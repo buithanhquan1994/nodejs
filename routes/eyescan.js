@@ -9,7 +9,7 @@ var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended:true }));
 
-
+// eyescan/
 router.get('/',(req, res) => {
 
   var objectImage = {
@@ -89,4 +89,15 @@ router.get('/',(req, res) => {
   console.log(objectImage);
 });
 
+
+router.get('/detail/:image_id',(req, res) => {
+    res.send(req.params.image_id);
+
+});
+
+router.post('/search',(req,res) => {
+  
+  
+  res.send(req.body.keywordInput);
+});
 module.exports = router;

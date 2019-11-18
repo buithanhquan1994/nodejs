@@ -8,19 +8,20 @@ block contentEyescan
   div.row.justify-content-between
     // left-box
     div.col-md-3.col-sm-5
-      div.card.h-75.border.rounded
+      div.card.h-100.border.rounded
         div.card-body
           // Search box
-          div.card-block.align-middle-center.align-center.row.justify-content-center.border-bottom
-            div.input-group.mb-2.col-md-12.col-sm-12
-              input.form-control.amsify-suggestags-input(type='text',placeholder='Keyword',aria-describedby='basic-addon2',name="keywordInput")
-              div.input-group-append
-                button.btn.btn-outline-primary(type='button')
-                  i.fa.fa-search
+          div.card-block.align-middle-center.align-center.row.justify-content-center.border-bottom.row
+            form.col-md-11.col-sm-11(method='post',action='/eyescan/search')
+              div.input-group.mb-2
+                input.form-control.amsify-suggestags-input(type='text',placeholder='Keyword',aria-describedby='basic-addon2',name="keywordInput")
+                div.input-group-append
+                  button.btn.btn-outline-primary(type='submit')
+                    i.fa.fa-search
            
     // right-box
-    div.col-md-9.col-sm-7
-      div.card.border.rounded.h-auto
+    div.col-md-9.col-sm-7.h-100
+      div.card.border.rounded.h-100
         div.card-header
           p.card-title.font-weight-bold
             |LIST IMAGE
@@ -43,7 +44,8 @@ block contentEyescan
             each objItem,key in listIMG 
               each item in objItem  
                 div.grid-item(class='#{key}')
-                  img.img-thumbnail.img-item-grid(src='#{item.url}')
+                  a(href='/eyescan/detail/1')
+                    img.img-thumbnail.img-item-grid(src='#{item.url}')
             
                 
           //- // if anterior

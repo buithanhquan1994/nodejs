@@ -1,7 +1,6 @@
 $(document).ready(function(){
 
-  $('input[name="keywordInput"]').amsifySuggestags();
-  
+  // grid isotope and filter
   var $grid = $('.grid').isotope({
     // options
     itemSelector: '.grid-item',
@@ -13,4 +12,17 @@ $(document).ready(function(){
 
     $grid.isotope({ filter: filterValue });
   });
+
+
+  // event input keywordInput
+  $('input[name="keywordInput"]').keyup(function(event) {
+    /* Act on the event */
+    var content = $(this).val();
+    var keycode = event.keyCode;
+    if(keycode === 13) // enter key
+    {
+      $(this).val(content + ', ');
+    }
+  });
+  
 });
