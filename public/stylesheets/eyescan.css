@@ -1,0 +1,5 @@
+.grid-item { width: 25%;}
+.img-item-grid:hover {
+  border-radius: .25rem;
+  border:3px solid #007bff;
+}

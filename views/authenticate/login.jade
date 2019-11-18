@@ -1,0 +1,48 @@
+extends ../layout/app
+block cssjslogin
+  link(rel='icon', href='/images/icons/favicon.ico',type='image/png')
+  link(rel='stylesheet',href='/fonts/font-awesome-4.7.0/css/font-awesome.min.css')
+  link(rel='stylesheet',href='/fonts/iconic/css/material-design-iconic-font.min.css')
+
+  link(rel='stylesheet',href='/vendor/animate/animate.css')
+  link(rel='stylesheet',href='/vendor/css-hamburgers/hamburgers.min.css')
+  link(rel='stylesheet',href='/vendor/animsition/css/animsition.min.css')
+  link(rel='stylesheet',href='/vendor/select2/select2.min.css')
+  link(rel='stylesheet',href='/vendor/daterangepicker/daterangepicker.css')
+  link(rel='stylesheet',href='/stylesheets/util.css')
+  link(rel='stylesheet',href='/stylesheets/main.css')
+block content
+  div.container-login100
+    div.wrap-login100.p-l-55.p-r-55.p-t-80.p-b-30
+      form.login100-form.validate-form(method='post',action='/users/login')
+        div.card-block.text-center.align-middle-center
+          i.fa.fa-home.icon-login-form
+        span.login100-form-title.p-b-37
+          | LOG IN
+        div.wrap-input100.validate-input.m-b-20(data-validate='Enter username or email')
+          input.input100(type='text',name='username',placeholder='username or email')
+          span.focus-input100
+        div.wrap-input100.validate-input.m-b-25(data-validate='Enter password')
+          input.input100(type='password',name='password', placeholder='password')
+          span.focus-input100
+        div.container-login100-form-btn
+          button.login100-form-btn
+            | SUBMIT
+        if msg_error
+          div.card-block.alert.alert-danger.error-login.text-center.rounded
+            p.text-danger.font-weight-bold
+              |{msg_error}
+
+        
+
+       
+
+               
+block externalJS         
+  script(src='/vendor/jquery/jquery-3.2.1.min.js')       
+  script(src='/vendor/animsition/js/animsition.min.js')
+  script(src='/vendor/select2/select2.min.js')
+  script(src='/vendor/daterangepicker/moment.min.js')
+  script(src='/vendor/daterangepicker/daterangepicker.js')
+  script(src='/vendor/countdowntime/countdowntime.js')
+  script(src='/javascripts/main.js')

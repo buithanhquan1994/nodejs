@@ -1,0 +1,84 @@
+extends layout
+
+block eyescanJS
+  script(src='/javascripts/jquery.amsify.suggestags.js')
+  script(src='/javascripts/eyescanJS.js')
+  
+block contentEyescan
+  div.row.justify-content-between
+    // left-box
+    div.col-md-3.col-sm-5
+      div.card.h-75.border.rounded
+        div.card-body
+          // Search box
+          div.card-block.align-middle-center.align-center.row.justify-content-center.border-bottom
+            div.input-group.mb-2.col-md-12.col-sm-12
+              input.form-control.amsify-suggestags-input(type='text',placeholder='Keyword',aria-describedby='basic-addon2',name="keywordInput")
+              div.input-group-append
+                button.btn.btn-outline-primary(type='button')
+                  i.fa.fa-search
+           
+    // right-box
+    div.col-md-9.col-sm-7
+      div.card.border.rounded.h-auto
+        div.card-header
+          p.card-title.font-weight-bold
+            |LIST IMAGE
+        div.card-body.h-auto
+          
+          // Loop object key to button 
+          if objectKey.length
+            div.card-block.align-middle-center.align-middle.mb-2.filter-button-group
+              button.btn.btn-outline-secondary.mr-1.button-type(data-filter="*")  Show All
+            
+              each val,index in objectKey
+                button.btn.btn-outline-secondary.mr-1.button-type(data-filter=".#{val}") #{val}
+          
+          // show all
+          
+      
+      
+        div.card-block
+          div.grid.align-middle-center.align-center
+            each objItem,key in listIMG 
+              each item in objItem  
+                div.grid-item(class='#{key}')
+                  img.img-thumbnail.img-item-grid(src='#{item.url}')
+            
+                
+          //- // if anterior
+          //- if anterior.length
+          //-   div.card.mb-2
+          //-     div.card-header
+          //-       p.card-title.font-weight-bold.h5 Anterior
+          //-     div.card-body
+          //-       div.grid.align-middle-center.align-center
+          //-         each val,index in anterior
+          //-            div.grid-item
+          //-              img.img-thumbnail.img-item-grid(src='#{val.url}')
+          //- 
+          //- // if positerior
+          //- if posterior.length
+          //-   div.card.mb-2
+          //-     div.card-header
+          //-       p.card-title.font-weight-bold.h5 Posterior
+          //-     div.card-body
+          //-       div.grid.align-middle-center.align-center
+          //-         each val,index in posterior
+          //-            div.grid-item
+          //-              img.img-thumbnail.img-item-grid(src='#{val.url}')
+          //- 
+          //- // if other
+          //- if other.length
+          //-  div.card.mb-2
+          //-    div.card-header
+          //-      p.card-title.font-weight-bold.h5 Other
+          //-    div.card-body
+          //-      div.grid.align-middle-center.align-center
+          //-        each val,index in other
+          //-           div.grid-item
+          //-             img.img-thumbnail.img-item-grid(src='#{val.url}')
+              
+    
+        
+             
